@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import uuid from 'react-uuid'
 import { TodoInput } from '../components/TodoInput'
+import { todoService } from '../services/todoService'
 
 export const AddTodo = (props) => {
     const [newTodo, setNewTodo] = useState({
@@ -9,7 +10,7 @@ export const AddTodo = (props) => {
         dateEcheance: "",
         isDone: false
     })
-
+    
     const todoKeys = [{
         name: "label",
         text: "tâche",
@@ -31,7 +32,7 @@ export const AddTodo = (props) => {
     }
 
     const saveInput = (name, value) => {
-        setNewTodo((previousTodo) => {return {...previousTodo, [name]: value}})
+        setNewTodo((previousTodo) => { return { ...previousTodo, [name]: value } })
     }
 
     const handleClickSave = () => {
@@ -43,7 +44,7 @@ export const AddTodo = (props) => {
         <>
             <h2>Ajouter un Todo</h2>
             <div style={style.container}>
-                {todoKeys.map((item, index) => (<TodoInput item={item} key={index} todo={newTodo} saveInput={saveInput}/>))}
+                {todoKeys.map((item, index) => (<TodoInput item={item} key={index} todo={newTodo} saveInput={saveInput} />))}
             </div>
             <button onClick={handleClickSave}>Save</button>
         </>

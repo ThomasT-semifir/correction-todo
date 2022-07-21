@@ -2,10 +2,12 @@ import React, { useState } from 'react'
 import { Todo } from '../components/Todo'
 import { todoData } from '../services/todoData'
 import { Button }from 'primereact/button'
+import { todoService } from '../services/todoService'
 
 export const TodoList = (props) => {
     
     const [filter, setFilter] = useState(null)
+
 
     // création d'un objet filters afin de créer les boutons de filtre dynamiquement grâce à un map
     const filters = {

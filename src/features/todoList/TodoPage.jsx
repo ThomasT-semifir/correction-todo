@@ -1,16 +1,27 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { AddTodo } from './layouts/AddTodo'
 import { TodoList } from './layouts/TodoList'
 import { todoData } from './services/todoData'
+import { todoService } from './services/todoService'
 
 export const TodoPage = () => {
-    const [todos, setTodos] = useState(todoData)
+    const [todos, setTodos] = useState()
     const [showAdd, setShowAdd] = useState(false)
 
-    const deleteTodo = (id) => {
-        setTodos((todos) => {return todos.filter(todo => todo.id !== id)})
+    useEffect(() => {
+        findAllTodo()
+    }, [])
+    
+    const findAllTodo = () => {
+        todoService.findAll().then(data => setTodos(data))
     }
 
+    const deleteTodo = (id) => {
+        todoService.delete(id)
+            .then(() => findAllTodo())
+    }
+    
+    
     /**
      * 
      * @param {*} modifiedTodo todo dont la valeur isDone a été modifié en cliquant sur le bouton
@@ -40,7 +51,7 @@ export const TodoPage = () => {
 
     return (
         <>
-            <TodoList todos={todos} toggleDone={toggleDone} deleteTodo={deleteTodo} />
+            <TodoList todos={todos} toggleDone={toggleDone} deleteTodo={deleteTodo} /> 
             <button onClick={() => setShowAdd((value) => !value)}>ajouter</button>
             {showAdd && <AddTodo addTodo={addTodo}/>}
         </>

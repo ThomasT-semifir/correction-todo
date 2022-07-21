@@ -8,7 +8,6 @@ export const Todo = (props) => {
     const defineBackgroundColor = (todo) => {
         let result;
         const today = Date.now()
-        console.log(today, Date.parse(todo.dateEcheance))
         if (today >= Date.parse(todo.dateEcheance) && !todo.isDone) {
             result = "red"
         } else if (today >= Date.parse(todo.dateEcheance) - 864000000 && !todo.isDone) {

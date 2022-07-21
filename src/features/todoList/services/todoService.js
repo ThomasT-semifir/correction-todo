@@ -1,9 +1,16 @@
-class TodoService {
+const URL ="http://localhost:3200/todoData"
 
-    URL = "http://localhost:3000/todoData"
+class TodoService{
 
     findAll = () => {
-        return fetch(URL).then(data => data.json())
-                        .catch(err => console.error(err))
+        return fetch(URL).then((res, rej) => res.json())
+    }
+
+    delete = (id) => {
+        return fetch(`${URL}/${id}`, {
+            method: 'DELETE',
+            }).then((res, rej) => res.json())
     }
 }
+
+export const todoService = Object.freeze(new TodoService())
