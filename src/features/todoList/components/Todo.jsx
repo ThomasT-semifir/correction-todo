@@ -50,9 +50,8 @@ export const Todo = (props) => {
      * Cette fonction permet de récupérer le todo actuel (celui passé en props) pour changer la valeur de isDone.
      * Elle le renvoie ensuite à la méthode passée en props par le parent pour remonter la modification dans le state
      */
-    const toggleDone = (event) => {
-        const modifiedTodo = {...props.todo, isDone: !props.todo.isDone}
-        props.toggleDone(modifiedTodo)
+    const toggleDone = () => {
+        props.toggleDone(props.todo.id, { isDone: !props.todo.isDone} )
     }
     
     return (
