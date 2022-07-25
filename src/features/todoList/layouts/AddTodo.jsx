@@ -8,7 +8,7 @@ export const AddTodo = (props) => {
         id: uuid(),
         label: "",
         dateEcheance: "",
-        isDone: false
+        isDone: false,
     })
     
     const todoKeys = [{

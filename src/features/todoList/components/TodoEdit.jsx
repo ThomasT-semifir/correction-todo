@@ -3,8 +3,9 @@ import { TodoButton } from './TodoButton';
 import { ImCross } from 'react-icons/im'
 import { FaRegThumbsDown, FaRegThumbsUp } from 'react-icons/fa'
 import uuid from 'react-uuid';
+import { InputText } from 'primereact/inputtext';
 
-export const Todo = (props) => {
+export const TodoEdit = (props) => {
     const defineBackgroundColor = (todo) => {
         let result;
         const today = Date.now()
@@ -58,7 +59,7 @@ export const Todo = (props) => {
         <>
             <div style={style.container}>
             <div style={style.cell}>
-                <p onClick={() => props.handleClickText(props.todo.id)}>{props.todo.label}</p>
+                <InputText value={props.todo.label} onChange={null}/>
                 <p>{props.todo.dateEcheance}</p>
                 <div style={style.buttons}>
                     <TodoButton handleClick={deleteTodo}><ImCross /></TodoButton>

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { TodoButton } from './components/TodoButton'
 import { AddTodo } from './layouts/AddTodo'
 import { TodoList } from './layouts/TodoList'
 import { todoData } from './services/todoData'
@@ -20,7 +21,6 @@ export const TodoPage = () => {
         todoService.delete(id)
             .then(() => findAllTodo())
     }
-    
     
     /**
      * 
@@ -46,14 +46,16 @@ export const TodoPage = () => {
      * Cette fonction ajoute un todo à la liste. Elle permet également de ne plus afficher le composant AddTodo une fois qu'on a cliqué sur sauvegarder
      */
     const addTodo = (newTodo) => {
-        setTodos((todos) => {return [...todos, newTodo]})
-        setShowAdd((value) => !value)
+        todoService.createTodo(newTodo).then(() => {
+            findAllTodo()
+        })
+        
     }
 
     return (
         <>
-            <TodoList todos={todos} toggleDone={toggleDone} deleteTodo={deleteTodo} /> 
-            <button onClick={() => setShowAdd((value) => !value)}>ajouter</button>
+            <TodoList todos={todos} toggleDone={toggleDone} deleteTodo={deleteTodo}/> 
+            <TodoButton handleClick={() => setShowAdd((value) => !value)}>ajouter</TodoButton>
             {showAdd && <AddTodo addTodo={addTodo}/>}
         </>
     )
