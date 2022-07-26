@@ -21,7 +21,7 @@
     {
       "label": "boire un café",
       "dateEcheance": "2022-08-01",
-      "isDone": false,
+      "isDone": true,
       "id": 6
     },
     {
